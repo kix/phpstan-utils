@@ -2,11 +2,13 @@
     "name": "kix/phpstan-utils",
     "description": "A set of utilities to analyze PHPStan baselines",
     "type": "project",
+    "license": "MIT",
     "require": {
         "nette/neon": "^3.4",
         "symfony/console": "^7.2"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-latest",
         "phpunit/phpunit": "^11.5",
         "phpstan/phpstan": "^2.1"
     },
