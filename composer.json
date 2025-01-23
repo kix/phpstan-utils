@@ -1,0 +1,24 @@
+{
+    "name": "kix/phpstan-utils",
+    "description": "A set of utilities to analyze PHPStan baselines",
+    "type": "project",
+    "require": {
+        "nette/neon": "^3.4",
+        "symfony/console": "^7.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.5",
+        "phpstan/phpstan": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kix\\PhpstanUtils\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Stepan Anchugov",
+            "email": "kixxx1@gmail.com"
+        }
+    ]
+}
