@@ -20,8 +20,14 @@ final class CollectCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $baselineFilename = $input->getArgument('baseline-filename');
+
+        if (!is_string($baselineFilename)) {
+            throw new \InvalidArgumentException('Baseline filename must be a string');
+        }
+
         $collector = new Collector();
-        $collector->collect($input->getArgument('baseline-filename'));
+        $collector->collect($baselineFilename);
 
         return 0;
     }

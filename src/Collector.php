@@ -2,6 +2,7 @@
 
 namespace Kix\PhpstanUtils;
 
+use http\Exception\RuntimeException;
 use Nette\Neon\Neon;
 
 /**
@@ -14,26 +15,31 @@ use Nette\Neon\Neon;
  */
 final readonly class Collector
 {
-    /**
-     * @return IgnoredError[]
-     */
-    public function collect(string $filename): array
+    public function collect(string $filename): IgnoredErrorCollection
     {
         $decoded = Neon::decodeFile($filename);
+
+        if (!is_array($decoded)) {
+            throw new RuntimeException('Could not decode ' . $filename . '.');
+        }
+
         $coll = new IgnoredErrorCollection();
 
         if (!array_key_exists('parameters', $decoded)) {
             throw new \RuntimeException('`parameters` key not found in ' . $filename);
         }
 
-        if (!array_key_exists('ignoreErrors', $decoded['parameters'])) {
+        if (!is_array($decoded['parameters'])
+            || !array_key_exists('ignoreErrors', $decoded['parameters'])
+            || !is_iterable($decoded['parameters']['ignoreErrors'])) {
             throw new \RuntimeException('`ignoreErrors` key not found in ' . $filename);
         }
 
-        foreach ($decoded['parameters']['ignoreErrors'] as $error) {
-            $coll->add(IgnoredError::fromNeonDefinition($error));
+        foreach ($decoded['parameters']['ignoreErrors'] as $definition) {
+            /** @var array{'message': string, 'count': int, 'path': string} $definition */
+            $coll->add(IgnoredError::fromNeonDefinition($definition));
         }
 
-        return $decoded;
+        return $coll;
     }
 }

@@ -4,6 +4,9 @@ namespace Kix\PhpstanUtils;
 
 final class IgnoredErrorCollection
 {
+    /**
+     * @var IgnoredError[]
+     */
     private array $errors;
 
     public function __construct(
@@ -16,6 +19,9 @@ final class IgnoredErrorCollection
         $this->errors []= $error;
     }
 
+    /**
+     * @return IgnoredError[]
+     */
     public function all(): array
     {
         return $this->errors;

@@ -11,6 +11,10 @@ final readonly class IgnoredError
         public string $path,
     ) {}
 
+    /**
+     * @param array{'message': string, 'count': int, 'path': string} $definition
+     * @return self
+     */
     public static function fromNeonDefinition(array $definition): self
     {
         foreach (self::REQUIRED_FIELDS as $field) {
