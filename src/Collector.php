@@ -7,6 +7,10 @@ use Nette\Neon\Neon;
 /**
  * Use cases:
  * * Count errors based on their type, as in staabm/phpstan-baseline-analysis
+ * * Count errors based on their type, and then group them in a treelike structure
+ *   based on their matched arguments
+ * * Collect git blame stats on best and worst baseline contributors, taking error
+ *   count into accountk
  */
 final readonly class Collector
 {
